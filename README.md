@@ -48,21 +48,6 @@ streamlit run app.py
    - **Candidate Mode**: Upload your resume and a job description to get feedback
    - **Manager Mode**: Upload multiple resumes and a job description to rank candidates
 
-## Project Structure
-
-```
-resume-screener/
-├── app.py                 # Main Streamlit app
-├── pages/                 # Streamlit pages
-│   ├── 1_Candidate_Mode.py
-│   └── 2_Manager_Mode.py
-├── utils/                 # Utility functions
-│   ├── text_extraction.py
-│   ├── similarity.py
-│   └── keywords.py
-├── sample_data/          # Sample resumes and job descriptions
-└── requirements.txt      # Python dependencies
-```
 
 ## Dependencies
 
