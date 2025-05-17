@@ -2,6 +2,9 @@
 
 An AI-powered resume screening application built with Streamlit that helps both job candidates and hiring managers evaluate resume-job description matches.
 
+
+![Alt text](assets/ai-resume-screener-2.png "Optional title")
+
 ## Features
 
 - Semantic similarity scoring using sentence transformers
