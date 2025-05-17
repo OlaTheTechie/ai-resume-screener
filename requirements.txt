@@ -1,12 +1,10 @@
-# Core dependencies with known compatibili
+# Core dependencies
+streamlit
+spacy==3.6.1
 sentence-transformers==2.2.2
 numpy
-spacy==3.6.1
-https://github.com/explosion/spacy-models/releases/latest/download/en_core_web_sm-any-py3-none-any.whl
-streamlit
-PyPDF2
 pandas
-python-docx
 nltk
+PyPDF2
 pdfplumber
-
+python-docx
