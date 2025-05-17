@@ -1,11 +1,10 @@
-# sentence_transformers>=2.2.2
-# numpy>=1.24.0
-# spacy<3.7.0
-# en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.0/en_core_web_sm-3.7.0-py3-none-any.whl 
+# Core dependencies
 streamlit
-# sentence-transformers
-PyPDF2 
-# spacy
+spacy==3.6.1
+sentence-transformers==2.2.2
+numpy
 pandas
+nltk
+PyPDF2
+pdfplumber
 python-docx
-nltk 
