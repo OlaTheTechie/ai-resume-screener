@@ -1,46 +1,38 @@
-import PyPDF2
+import pdfplumber
 from docx import Document
-import spacy
-from typing import Union, List
 import os
 
-def extract_text_from_pdf(file_path: str) -> str:
+def extract_text_from_pdf(file) -> str:
     text = ""
-    try:
-        with open(file_path, 'rb') as file:
-            pdf_reader = PyPDF2.PdfReader(file)
-            for page in pdf_reader.pages:
-                text += page.extract_text()
-    except Exception as e:
-        print(f"Error reading PDF: {str(e)}")
-        return ""
+    with pdfplumber.open(file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() or ""
     return text
 
-def extract_text_from_docx(file_path: str) -> str:
-    try:
-        doc = Document(file_path)
-        return "\n".join([paragraph.text for paragraph in doc.paragraphs])
-    except Exception as e:
-        print(f"Error reading DOCX: {str(e)}")
-        return ""
+def extract_text_from_docx(file) -> str:
+    doc = Document(file)
+    return "\n".join([p.text for p in doc.paragraphs])
 
-def extract_text_from_file(file_path: str) -> str:
-    file_extension = os.path.splitext(file_path)[1].lower()
-    
-    if file_extension == '.pdf':
-        return extract_text_from_pdf(file_path)
-    elif file_extension == '.docx':
-        return extract_text_from_docx(file_path)
-    elif file_extension == '.txt':
+def extract_text_from_file(file) -> str:
+    # file can be a Streamlit UploadedFile or a path string
+    if hasattr(file, 'name'):
+        ext = os.path.splitext(file.name)[1].lower()
+    else:
+        ext = os.path.splitext(file)[1].lower()
+
+    if ext == '.pdf':
+        return extract_text_from_pdf(file)
+    elif ext == '.docx':
+        return extract_text_from_docx(file)
+    elif ext == '.txt':
         try:
-            with open(file_path, 'r', encoding='utf-8') as file:
-                return file.read()
+            if hasattr(file, 'read'):
+                return file.read().decode('utf-8')
+            else:
+                with open(file, 'r', encoding='utf-8') as f:
+                    return f.read()
         except Exception as e:
-            print(f"Error reading text file: {str(e)}")
+            print(f"Error reading text file: {e}")
             return ""
     else:
-        raise ValueError(f"Unsupported file format: {file_extension}")
-
-def preprocess_text(text: str) -> str:
-    text = ' '.join(text.split())
-    return text.strip() 
+        raise ValueError(f"Unsupported file format: {ext}")
