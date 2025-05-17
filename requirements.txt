@@ -1,10 +1,13 @@
-# Core dependencies
 streamlit
-spacy==3.6.1
 sentence-transformers==2.2.2
 numpy
+spacy==3.6.1
 pandas
-nltk
 PyPDF2
-pdfplumber
 python-docx
+nltk
+pdfplumber
+
+# Add these to prevent build errors
+setuptools
+wheel
